@@ -7,6 +7,10 @@ NAME		=	pipex
 CC			=	cc
 FLAGS		=	-Wall -Wextra -Werror -g3
 
+OBJ_DIR		=	obj
+SRC_DIR		=	src
+BSRC_DIR	=	src/bonus
+
 #---------------------------\\\\\___SOURCES___/////----------------------------#
 
 SRC			=	${MAIN} ${UTILS}
@@ -22,40 +26,47 @@ BONUS		=	./src/bonus/pipex_bonus.c \
 
 LIBFT		=	./libft/libft.a
 
-OBJ			=	${SRC:.c=.o}
+OBJ			=	$(patsubst %.c,${OBJ_DIR}/%.o,${SRC})
 
-OBJ_BONUS	=	${BONUS:.c=.o}
+OBJ_BONUS	=	$(patsubst %.c,${OBJ_DIR}/%.o,${BONUS})
 
 #----------------------------\\\\\___RULES___/////-----------------------------#
 
 all:			${NAME}
 
-%.o: %.c
-				@${CC} ${FLAGS} -c $< -o ${<:.c=.o}
+${OBJ_DIR}/%.o: %.c | ${OBJ_DIR}
+				@mkdir -p $(dir $@)
+				@${CC} ${FLAGS} -c $< -o $@
+
+${OBJ_DIR}:
+				@mkdir -p ${OBJ_DIR}
 
 ${LIBFT}:
-				@echo "🧠 Compiling libft..."
+				@echo "📡 Pulling libft..."
+				@git clone https://github.com/abollia/libft.git > /dev/null 2>&1;
 				@make -C libft
 
-${NAME}:		${OBJ} ${LIBFT}
+vpath %.c . ${SRC_DIR}
+
+${NAME}:		${LIBFT} ${OBJ}
 				@echo "🧠 Compiling ${NAME}..."
 				@${CC} ${FLAGS} ${OBJ} ${LIBFT} -o ${NAME}
-				@echo "✅ 🦾 ${NAME} is ready!"
+				@echo "✅🦾 ${NAME} is ready!"
 
-bonus:			${OBJ_BONUS} ${LIBFT}
+bonus:			${LIBFT} ${OBJ_BONUS}
 				@echo "🧠 Compiling ${NAME} bonus"
 				@${CC} ${FLAGS} ${OBJ_BONUS} ${LIBFT} -o ${NAME}
-				@echo "✅ 🦾 ${NAME} bonus is ready!"
+				@echo "✅🦾 ${NAME} bonus is ready!"
 
 clean:
 				@echo "🚮 Removing project files..."
-				@rm -f ${OBJ} ${OBJ_BONUS}
+				@rm -rf ${OBJ_DIR}
 				@make clean -C ./libft
 
 fclean:			clean
 				@echo "🚮 Removing project..."
 				@rm -f ${NAME}
-				@rm -f ${LIBFT}
+				@rm -rf libft
 				@echo "❌ ${NAME} has been removed."
 
 re:				fclean all

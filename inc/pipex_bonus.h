@@ -6,14 +6,14 @@
 /*   By: abollia <abollia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 13:23:07 by abollia           #+#    #+#             */
-/*   Updated: 2025/03/11 13:55:39 by abollia          ###   ########.fr       */
+/*   Updated: 2025/04/15 12:38:50 by abollia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_BONUS_H
 # define PIPEX_BONUS_H
 
-# include "../libft/libft.h"
+# include "../libft/inc/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>

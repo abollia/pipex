@@ -6,14 +6,14 @@
 /*   By: abollia <abollia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 13:23:07 by abollia           #+#    #+#             */
-/*   Updated: 2025/03/10 13:23:23 by abollia          ###   ########.fr       */
+/*   Updated: 2025/04/15 12:38:44 by abollia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include "../libft/libft.h"
+# include "../libft/inc/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
